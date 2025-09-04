@@ -78,8 +78,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         locations.forEach(location => {
             const locationEl = document.createElement('div');
-            locationEl.className = 'country-item bg-gray-700 hover:bg-cyan-900/50 border border-gray-600 p-3 rounded-lg text-center shadow-md transition-colors duration-300 cursor-default';
+            locationEl.className = 'country-item bg-gray-700 hover:bg-cyan-900/50 border border-gray-600 p-3 rounded-lg text-center shadow-md transition-colors duration-300 cursor-pointer';
             locationEl.textContent = location;
+            locationEl.addEventListener('click', () => {
+                // Remove any previous expanded info
+                const prevInfo = document.getElementById('country-info-expanded');
+                if (prevInfo) prevInfo.remove();
+                // Find country data
+                const countryName = location.split(' (')[0];
+                const countryData = countryTimezonesData.find(c => c.country_name === countryName);
+                if (!countryData) return;
+                // Create expanded info
+                const infoDiv = document.createElement('div');
+                infoDiv.id = 'country-info-expanded';
+                infoDiv.className = 'col-span-full bg-gray-800 border border-cyan-400 rounded-xl mt-4 p-6 flex flex-col items-center animate-fadeIn';
+                infoDiv.innerHTML = `
+                    <div class="flex justify-center items-center mb-2" style="aspect-ratio: 4/3; width: 64px; max-width: 100%;">
+                        <img src="${countryData.flag || countryData.Flag}" alt="Bandeira de ${countryData.country_name}" style="width:100%; height:100%; object-fit:contain; aspect-ratio:4/3;" class="rounded shadow-md" />
+                    </div>
+                    <h2 class="text-xl font-bold text-cyan-300 mb-1">${countryData.country_name}</h2>
+                    <div class="text-gray-300 mb-2">Idioma: <span class="font-semibold">${countryData.Language}</span></div>
+                    <div class="text-lg text-pink-400 font-semibold mb-2">Eu te amo: "${countryData.Love}"</div>
+                    <button id="close-country-info" class="mt-2 px-4 py-1 bg-cyan-700 hover:bg-cyan-900 text-white rounded-lg">Fechar</button>
+                `;
+                countriesListEl.appendChild(infoDiv);
+                document.getElementById('close-country-info').onclick = () => infoDiv.remove();
+            });
             countriesListEl.appendChild(locationEl);
         });
     }
