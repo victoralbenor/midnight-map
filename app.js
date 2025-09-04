@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 line.attr("x1", lineX).attr("x2", lineX);
             }
             updateMidnightLine();
-            setInterval(updateMidnightLine, 1000);
         });
     }
 
