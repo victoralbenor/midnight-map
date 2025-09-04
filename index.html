@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries at Midnight</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a cleaner look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4">
+    <div class="max-w-4xl w-full mx-auto p-6 sm:p-8 bg-gray-800 rounded-2xl shadow-2xl border border-gray-700">
+        <div class="text-center">
+            <h1 class="text-3xl sm:text-4xl font-bold text-cyan-400 mb-2">Onde começamos a namorar agora?</h1>
+            <p class="text-gray-400 mb-6">Lista atualizada de países no horário de 00:00 às 00:59</p>
+        </div>
+        <!-- Container for the D3 World Map -->
+        <div id="map-container"></div>
+        <div id="last-updated" class="text-center text-sm text-gray-500 mb-8">Carregando...</div>
+        <!-- Container for the list of countries -->
+        <div id="countries-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="h-12 bg-gray-700 rounded-lg animate-pulse"></div>
+            <div class="h-12 bg-gray-700 rounded-lg animate-pulse"></div>
+            <div class="h-12 bg-gray-700 rounded-lg animate-pulse hidden sm:block"></div>
+            <div class="h-12 bg-gray-700 rounded-lg animate-pulse hidden md:block"></div>
+        </div>
+    </div>
+    <!-- D3.js and TopoJSON libraries for map rendering -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <!-- Data JS (must be loaded before main JS) -->
+    <script src="data.js"></script>
+    <!-- Main JS -->
+    <script src="app.js"></script>
+</body>
+</html>
